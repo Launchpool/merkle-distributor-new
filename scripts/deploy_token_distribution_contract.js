@@ -1,5 +1,5 @@
 const prompt = require('prompt-sync')()
-const ERC20Metdata = require('../artifacts/contracts/test/TestERC20.sol/TestERC20.json')
+const ERC20Metadata = require('../artifacts/contracts/test/TestERC20.sol/TestERC20.json')
 const MerkleDistributor = require('../artifacts/contracts/MerkleDistributor.sol/MerkleDistributor.json')
 
 async function main () {
@@ -33,8 +33,8 @@ async function main () {
 
   prompt('\nIf happy, hit enter...\n')
 
-  console.log('\nApproving fund raising contract to move tokens...')
   const deployerAddress = await deployer.getAddress()
+  console.log('\nMoving tokens from ' + deployerAddress + ' to ' + merkleDistributorInstance.address)
   const tx = await tokenInstance.transferFrom(deployerAddress, merkleDistributorInstance.address, maxTokens)
   await tx.wait()
 
