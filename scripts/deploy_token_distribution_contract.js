@@ -6,9 +6,9 @@ async function main () {
   const [deployer] = await ethers.getSigners()
   console.log('Deploying staking contract with guild using the account:', await deployer.getAddress())
 
-  const tokenAddress = prompt('Token address? ') // 0x6149C26Cd2f7b5CCdb32029aF817123F6E37Df5B
-  const merkleRoot = prompt('Merkle root? ') // copy from generated json
-  const maxTokens = prompt('Max tokens? ') // copy from generated json
+  const tokenAddress = prompt('Token address? ') // 0x22acaee85ddb83a3a33b7f0928a0e2c3bfdb6a4f
+  const merkleRoot = prompt('Merkle root? ') // 0x9d9f8634db1902d10a2615ece779461a69e8fcc57749652d3f8663237c562ede copy from generated json
+  const maxTokens = prompt('Max tokens? ') // 0x0536a73e41382f311dd8 copy from generated json
 
   const tokenInstance = new ethers.Contract(tokenAddress, ERC20Metadata.abi, deployer)
   const decimals = await tokenInstance.decimals()
@@ -35,7 +35,7 @@ async function main () {
 
   const deployerAddress = await deployer.getAddress()
   console.log('\nMoving tokens from ' + deployerAddress + ' to ' + merkleDistributorInstance.address)
-  const tx = await tokenInstance.transferFrom(deployerAddress, merkleDistributorInstance.address, maxTokens)
+  const tx = await tokenInstance.transfer(merkleDistributorInstance.address, maxTokens)
   await tx.wait()
 
   console.log('Done!')
