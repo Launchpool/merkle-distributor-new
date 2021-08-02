@@ -1,0 +1,13 @@
+[
+  { "address": "0xDb7D1459dDCe7887266F25De31f090ff0EafEa6C", "tokenId": "1", "amount": "1" },
+  {
+    "address": "0xbefedC3e68e4D2C7D6fb84914B460798F286cf95",
+    "tokenId": "0",
+    "amount": "3"
+  },
+  {
+    "address": "0x37e07A5957D96996ad3D8A4108D00dC28189CBDE",
+    "tokenId": "0",
+    "amount": "3"
+  }
+]
