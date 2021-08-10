@@ -6,9 +6,9 @@ async function main () {
   const [deployer] = await ethers.getSigners()
   console.log('Deploying staking contract with guild using the account:', await deployer.getAddress())
 
-  const tokenAddress = prompt('Token address? ') // 0x22acaee85ddb83a3a33b7f0928a0e2c3bfdb6a4f
-  const merkleRoot = prompt('Merkle root? ') // 0x9d9f8634db1902d10a2615ece779461a69e8fcc57749652d3f8663237c562ede copy from generated json
-  const maxTokens = prompt('Max tokens? ') // 0x0536a73e41382f311dd8 copy from generated json
+  const tokenAddress = prompt('Token address? ') // 0x07ca256267128fbe1a79b74fc7b0e6ed3359ad08
+  const merkleRoot = prompt('Merkle root? ') // 0x73c807b82a6fd7051c2581049718397b1505eb5e2f4fda7799691f790d9f456c copy from generated json
+  const maxTokens = prompt('Max tokens? ') // 0x21e6105fd58c copy from generated json
 
   const tokenInstance = new ethers.Contract(tokenAddress, ERC20Metadata.abi, deployer)
   const decimals = await tokenInstance.decimals()
@@ -18,6 +18,7 @@ async function main () {
 
   console.log('\nMerkle root:', merkleRoot)
   console.log('\nMax tokens:', ethers.BigNumber.from(maxTokens).toString())
+  console.log('\nMax tokens formatted:', ethers.utils.formatUnits(maxTokens, decimals).toString())
 
   prompt('If happy, hit enter...')
 
