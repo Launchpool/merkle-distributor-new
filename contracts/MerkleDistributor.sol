@@ -7,9 +7,10 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "./interfaces/IMerkleDistributor.sol";
 
 contract MerkleDistributor is IMerkleDistributor, Ownable {
-    uint256 private constant TIMELOCK_DURATION = 30 days;
+    uint256 public timelockDurationDays;
     uint256 public timelock;
     uint256 public creationTime;
+    bool public isClaimingPaused;
 
     modifier notLocked() {
         require(timelock <= block.timestamp, "Function is timelocked");
@@ -22,11 +23,12 @@ contract MerkleDistributor is IMerkleDistributor, Ownable {
     // This is a packed array of booleans.
     mapping(uint256 => uint256) private claimedBitMap;
 
-    constructor(address token_, bytes32 merkleRoot_) public {
+    constructor(address token_, bytes32 merkleRoot_, uint256 _timelockDurationDays) public {
         token = token_;
         merkleRoot = merkleRoot_;
         creationTime = block.timestamp;
-        timelock = creationTime + TIMELOCK_DURATION;
+        timelockDurationDays = _timelockDurationDays * 1 days;
+        timelock = creationTime + timelockDurationDays;
     }
 
     function isClaimed(uint256 index) public view override returns (bool) {
@@ -51,6 +53,7 @@ contract MerkleDistributor is IMerkleDistributor, Ownable {
     ) external override {
         require(!isClaimed(index), "MerkleDistributor: Drop already claimed.");
         require(account == msg.sender, "MerkleDistributor: sender is not claimant.");
+        require(!isClaimingPaused, "MerkleDistributor: Cannot claim while claiming is paused");
 
         // Verify the merkle proof.
         bytes32 node = keccak256(abi.encodePacked(index, account, amount));
@@ -69,6 +72,10 @@ contract MerkleDistributor is IMerkleDistributor, Ownable {
 
     function timelockDuration() public view returns (uint256) {
         return timelock;
+    }
+
+    function setClaimingPaused(bool paused) public onlyOwner {
+       isClaimingPaused = paused;
     }
 
     function rescueTokens(address tokenAddress) public onlyOwner {
