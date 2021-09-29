@@ -16,7 +16,7 @@ let nonDevelopmentNetworks = {}
 if (PRIVATE_KEY) {
   nonDevelopmentNetworks = {
     mainnet: {
-      gasPrice: 20000000000, // 20 gwei
+      gasPrice: 110000000000, // 20 gwei
       url: `https://mainnet.infura.io/v3/${INFURA_PROJECT_ID}`,
       accounts: [`${PRIVATE_KEY}`]
     },
@@ -31,6 +31,14 @@ if (PRIVATE_KEY) {
     },
     mainnetbsc: {
       url: `https://bsc-dataseed.binance.org/`,
+      accounts: [`${PRIVATE_KEY}`]
+    },
+    mainnetfantom: {
+      url: `https://rpc.ftm.tools/`,
+      accounts: [`${PRIVATE_KEY}`]
+    },
+    testnetfantom: {
+      url: `https://rpc.testnet.fantom.network/`,
       accounts: [`${PRIVATE_KEY}`]
     }
   }
@@ -58,6 +66,6 @@ module.exports = {
     }
   },
   etherscan: {
-    apiKey: process.env.ETHERSCAN_KEY
+    apiKey: process.env.FTMSCAN_KEY
   }
 };
