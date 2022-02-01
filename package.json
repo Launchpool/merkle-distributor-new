@@ -62,6 +62,8 @@
     "contracts:deploy-test-token": "npx hardhat run scripts/deploy_test_custom_token.js --network",
     "contracts:deploy-token-distribution": "npx hardhat run scripts/deploy_token_distribution_contract.js --network",
     "contracts:deploy-nft-distribution": "npx hardhat run scripts/deploy_nft_distribution_contract.js --network",
+    "contracts:deploy-updateable-nft-distribution": "npx hardhat run scripts/deploy_updateable_nft_distribution_contract.js --network",
+    "contracts:reclaim-tokens": "npx hardhat run scripts/reclaim_token_distribution_tokens_from_contract.js --network",
     "contracts:verify": "npx hardhat verify --constructor-args arguments_merkle.js --network",
     "contracts:test-with-gas": "REPORT_GAS=true npx hardhat test --network localhost",
     "contracts:coverage": "npx hardhat coverage"

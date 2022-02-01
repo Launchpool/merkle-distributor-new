@@ -9,7 +9,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "./interfaces/IMerkleErc1155Distributor.sol";
 
 contract MerkleErc1155Distributor is IMerkleErc1155Distributor, Ownable, ERC1155Holder {
-    uint256 private constant TIMELOCK_DURATION = 30 days;
+    uint256 public timelockDurationDays;
     uint256 public timelock;
     uint256 public creationTime;
 
@@ -24,11 +24,12 @@ contract MerkleErc1155Distributor is IMerkleErc1155Distributor, Ownable, ERC1155
     // This is a packed array of booleans.
     mapping(uint256 => uint256) private claimedBitMap;
 
-    constructor(address token_, bytes32 merkleRoot_) public {
+    constructor(address token_, bytes32 merkleRoot_, uint256 _timelockDurationDays) public {
         token = token_;
         merkleRoot = merkleRoot_;
         creationTime = block.timestamp;
-        timelock = creationTime + TIMELOCK_DURATION;
+        timelockDurationDays = _timelockDurationDays * 1 days;
+        timelock = creationTime + timelockDurationDays;
     }
 
     function isClaimed(uint256 index) public view override returns (bool) {

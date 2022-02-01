@@ -18,5 +18,5 @@ fi
 
 jq -cr '.claims | keys[] as $k | "\($k)\t\(.[$k])"' "$file"  | awk -F\\t '{ file="claims/"$1".json"; print $2 > file; close(file); }'
 
-zip -r ${OUTPUT_DIR}_zipped.zip ${OUTPUT_DIR}
+zip -r ${file}_zipped.zip ${OUTPUT_DIR}
 echo "Successfully split claims - saved to 'claims' folder"

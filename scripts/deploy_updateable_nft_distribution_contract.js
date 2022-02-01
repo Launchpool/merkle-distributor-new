@@ -7,12 +7,11 @@ async function main () {
 
   console.log('Deploying staking contract with guild using the account:', await deployer.getAddress())
 
-  const tokenAddress = prompt('\nERC1155 address? ') // 0x7A3c1a95fF81819eAdB5b8D9Ca0D86891eD340Ed
-  const merkleRoot = prompt('\nMerkle root? ') // 0x4c8deaee140b3ce151162f6742f11f7c0c4c0f58a536579d7f7dbd45bfa20143 copy from generated json
-  const tokenId = prompt('\nToken Id? ') // 0x02
-  const amount = prompt('\nAmount to mint? ') // 0x146a
-  const amountToTransfer = prompt('\nAmount to transfer? ') // 0
-  const timelockDays = prompt('\nTimelock days? ') // 0
+  const tokenAddress = LPOOL_ERC1155_BSC_ADDRESS //prompt('\nERC1155 address? ') // 0x7A3c1a95fF81819eAdB5b8D9Ca0D86891eD340Ed
+  const merkleRoot = '0x7b0424355d998a6c6c92ebc8108db0dd27763a72300a63a0375be53209a83d70' //prompt('\nMerkle root? ') // 0x7b0424355d998a6c6c92ebc8108db0dd27763a72300a63a0375be53209a83d70 copy from generated json
+  const tokenId = '0x00' //prompt('\nToken Id? ') // 0x00
+  const amount = '0x0200' //prompt('\nAmount to mint? ') // 0x0200
+  const amountToTransfer = 0 //prompt('\nAmount to transfer? ') // 0
 
   const tokenInstance = new ethers.Contract(tokenAddress, ERC1155Metadata.abi, deployer)
 
@@ -25,9 +24,9 @@ async function main () {
 
   prompt('If happy, hit enter...')
 
-  const MerkleDistributorFactory = await ethers.getContractFactory('MerkleErc1155Distributor')
+  const MerkleDistributorFactory = await ethers.getContractFactory('UpdateableMerkleErc1155Distributor')
 
-  const merkleDistributorInstance = await MerkleDistributorFactory.deploy(tokenAddress, merkleRoot, timelockDays)
+  const merkleDistributorInstance = await MerkleDistributorFactory.deploy(tokenAddress, merkleRoot)
 
   await merkleDistributorInstance.deployed()
 
