@@ -71,15 +71,15 @@ All necessary constants for deployment and web3 communication separated by netwo
 
 ### Deploy test token
 
-`yarn deploy-test-token`
+`yarn deploy-test-token $network_name`
 
 ### Deploy merkle distributor
 
-`yarn deploy-token-distribution`
+`yarn deploy-token-distribution $network_name`
 
 ### Perform token reclaim
 
-`yarn reclaim-tokens`
+`yarn reclaim-tokens $network_name`
 
 ### Get coverage
 

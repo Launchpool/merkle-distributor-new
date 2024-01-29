@@ -3,7 +3,9 @@ build/
 wrangler.toml
 artifacts/
 cache/
-
+typechain/
+typechain-types/
+dist/
 /.idea/
 
 *.iml
