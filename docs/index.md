@@ -262,4 +262,3 @@ constructor(string name_, string symbol_, uint256 amountToMint) public
 ```solidity
 function setBalance(address to, uint256 amount) public
 ```
-
