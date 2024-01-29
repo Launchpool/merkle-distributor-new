@@ -14,7 +14,7 @@
 
 1. Install all modules using `yarn`
 2. Create `.env` file and complete it with your variables according to `.env.example`
-3. Add new networks and other settings in `hardhat.config.ts`
+3. Uncomment/Add new networks and other settings in `hardhat.config.ts`
 
 ## Project Structure
 
